@@ -3,11 +3,14 @@ const morgan= require('morgan')
 const mongoose= require('mongoose')
 const bodyParser= require('body-parser')
 
+
+const helmet = require('helmet')
+
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/apiAuthentification')
 const app = express();
-
-
+app.use(helmet())
+app.use(helmet.hidePoweredBy ({setTo: 'PHP 4.2.0'}))
 // Middlewares
 app.use(morgan('dev'))
 app.use(bodyParser.json())
